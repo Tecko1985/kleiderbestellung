@@ -3,6 +3,7 @@ let currentUsername = null;
 let currentIsAdmin = false;
 let currentVorname = null;
 let currentNachname = null;
+let currentMannschaften = [];
 
 function escapeHtml(s) {
   return String(s || "").replace(/[&<>"']/g, (c) => ({
@@ -90,7 +91,8 @@ function renderHeaderUser() {
   const name = (currentVorname || currentNachname)
     ? `${currentVorname || ""} ${currentNachname || ""}`.trim()
     : currentUsername;
-  el.textContent = "👤 " + name + (currentIsAdmin ? " (Admin)" : "");
+  const mannschaftHinweis = currentMannschaften.length ? ` (${currentMannschaften.join(", ")})` : "";
+  el.textContent = "👤 " + name + mannschaftHinweis + (currentIsAdmin ? " (Admin)" : "");
 }
 
 function activateTab(name) {
@@ -530,6 +532,7 @@ async function init() {
     currentIsAdmin = !!me.isAdmin;
     currentVorname = me.vorname || null;
     currentNachname = me.nachname || null;
+    currentMannschaften = Array.isArray(me.mannschaften) ? me.mannschaften : [];
     appData = normalizeAppData(data);
     document.getElementById("nav-einstellungen").style.display = currentIsAdmin ? "" : "none";
     startApp();

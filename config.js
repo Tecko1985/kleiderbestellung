@@ -1,6 +1,17 @@
-const APP_VERSION = "1.0";
+const APP_VERSION = "1.1";
 
 const APP_CHANGELOG = [
+  {
+    version: "1.1",
+    groups: [
+      {
+        title: "Sonstiges",
+        items: [
+          "Betreute Mannschaft(en) aus dem zentralen Trainerprofil (Tools-Übersicht) werden jetzt als Hinweis neben dem eigenen Namen angezeigt, sofern dort gepflegt."
+        ]
+      }
+    ]
+  },
   {
     version: "1.0",
     groups: [
