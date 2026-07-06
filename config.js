@@ -1,6 +1,17 @@
-const APP_VERSION = "1.1";
+const APP_VERSION = "1.2";
 
 const APP_CHANGELOG = [
+  {
+    version: "1.2",
+    groups: [
+      {
+        title: "Bestellung aufgeben",
+        items: [
+          "Die Menge je Artikel ist jetzt fest vom Verein vorgegeben (Standardmenge aus dem Artikelkatalog) und kann von Trainer:innen nicht mehr geändert werden — nur die Größe ist frei wählbar."
+        ]
+      }
+    ]
+  },
   {
     version: "1.1",
     groups: [

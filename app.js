@@ -146,7 +146,7 @@ function renderMeineBestellung() {
     rowsEl.innerHTML = aktiveArtikel.map((a) => {
       const pos = mine.positionen.find((p) => p.artikelId === a.id);
       const groesse = pos ? pos.groesse : "";
-      const menge = pos ? pos.menge : (a.standardMenge || 1);
+      const menge = a.standardMenge || 1;
       const inaktivLabel = a.aktiv === false ? " (nicht mehr bestellbar)" : "";
       return `
         <div class="bestell-row" data-artikel-id="${escapeHtml(a.id)}">
@@ -155,7 +155,7 @@ function renderMeineBestellung() {
             <option value="">— keine Auswahl —</option>
             ${a.groessen.map((g) => `<option value="${escapeHtml(g)}" ${g === groesse ? "selected" : ""}>${escapeHtml(g)}</option>`).join("")}
           </select>
-          <input type="number" class="bestell-menge" min="1" step="1" value="${escapeHtml(menge)}" placeholder="Menge" ${offen ? "" : "disabled"} />
+          <input type="number" class="bestell-menge" min="1" step="1" value="${escapeHtml(menge)}" placeholder="Menge" disabled title="Die Menge ist je Artikel fest vom Verein vorgegeben." />
         </div>`;
     }).join("");
   }
