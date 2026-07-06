@@ -146,7 +146,7 @@ function renderMeineBestellung() {
     rowsEl.innerHTML = aktiveArtikel.map((a) => {
       const pos = mine.positionen.find((p) => p.artikelId === a.id);
       const groesse = pos ? pos.groesse : "";
-      const menge = pos ? pos.menge : "";
+      const menge = pos ? pos.menge : (a.standardMenge || 1);
       const inaktivLabel = a.aktiv === false ? " (nicht mehr bestellbar)" : "";
       return `
         <div class="bestell-row" data-artikel-id="${escapeHtml(a.id)}">
@@ -272,6 +272,7 @@ function renderKatalogVerwaltung() {
       <div class="katalog-row-main">
         <input type="text" class="katalog-name" value="${escapeHtml(a.name)}" />
         <input type="text" class="katalog-groessen" value="${escapeHtml((a.groessen || []).join(", "))}" />
+        <input type="number" class="katalog-menge" min="1" step="1" value="${escapeHtml(a.standardMenge || 1)}" title="Standardmenge" />
       </div>
       <div class="katalog-row-actions">
         <label class="katalog-aktiv-toggle">
@@ -288,13 +289,14 @@ async function addArtikel() {
   showKatalogError("");
   const name = document.getElementById("na-name").value.trim();
   const groessenRaw = document.getElementById("na-groessen").value.trim();
+  const standardMenge = Number(document.getElementById("na-menge").value) || 1;
   if (!name) { showKatalogError("Bitte einen Namen eingeben."); return; }
   const groessen = groessenRaw.split(",").map((s) => s.trim()).filter(Boolean);
   if (!groessen.length) { showKatalogError("Bitte mindestens eine Größe eingeben."); return; }
   const id = slugify(name);
   try {
     await saveWithConflictRetry((data) => {
-      data.katalog.artikel.push({ id, name, groessen, aktiv: true });
+      data.katalog.artikel.push({ id, name, groessen, standardMenge, aktiv: true });
     });
   } catch (e) {
     showKatalogError("Speichern fehlgeschlagen: " + e.message);
@@ -302,6 +304,7 @@ async function addArtikel() {
   }
   document.getElementById("na-name").value = "";
   document.getElementById("na-groessen").value = "";
+  document.getElementById("na-menge").value = "1";
   renderKatalogVerwaltung();
   renderMeineBestellung();
 }
@@ -499,9 +502,10 @@ async function init() {
     if (e.target.closest(".btn-save-artikel")) {
       const name = row.querySelector(".katalog-name").value.trim();
       const groessen = row.querySelector(".katalog-groessen").value.split(",").map((s) => s.trim()).filter(Boolean);
+      const standardMenge = Number(row.querySelector(".katalog-menge").value) || 1;
       const aktiv = row.querySelector(".katalog-aktiv").checked;
       if (!name || !groessen.length) { showKatalogError("Name und mindestens eine Größe erforderlich."); return; }
-      updateArtikel(artikelId, { name, groessen, aktiv });
+      updateArtikel(artikelId, { name, groessen, standardMenge, aktiv });
     } else if (e.target.closest(".btn-delete-artikel")) {
       deleteArtikel(artikelId);
     }

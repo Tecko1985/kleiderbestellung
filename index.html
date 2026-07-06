@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>👕 Kleiderbestellung</title>
 <meta name="theme-color" content="#1a56a0" />
-<link rel="stylesheet" href="style.css?v=1.0" />
+<link rel="stylesheet" href="style.css?v=1.1" />
 </head>
 <body>
 
@@ -96,6 +96,7 @@
         <div class="form-grid">
           <div class="form-field"><label>Name</label><input type="text" id="na-name" placeholder="z.B. Trainingsjacke" /></div>
           <div class="form-field"><label>Größen (Komma-getrennt)</label><input type="text" id="na-groessen" placeholder="z.B. XS, S, M, L, XL, XXL" /></div>
+          <div class="form-field"><label>Standardmenge</label><input type="number" id="na-menge" min="1" step="1" value="1" /></div>
         </div>
         <div class="btn-row" style="justify-content:flex-start;">
           <button type="button" class="btn secondary" id="btn-add-artikel">+ Artikel hinzufügen</button>
@@ -134,8 +135,8 @@
 <!-- Druckbereich (nur für PDF-Export sichtbar) -->
 <div id="print-area"><div id="print-content"></div></div>
 
-<script src="config.js?v=1.0"></script>
-<script src="db.js?v=1.0"></script>
-<script src="app.js?v=1.0"></script>
+<script src="config.js?v=1.1"></script>
+<script src="db.js?v=1.1"></script>
+<script src="app.js?v=1.1"></script>
 </body>
 </html>

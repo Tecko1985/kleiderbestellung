@@ -1,6 +1,17 @@
-const APP_VERSION = "1.0";
+const APP_VERSION = "1.1";
 
 const APP_CHANGELOG = [
+  {
+    version: "1.1",
+    groups: [
+      {
+        title: "Artikelkatalog (nur Admins)",
+        items: [
+          "Standardmenge je Artikel festlegbar — die Mengen-Eingabe im Bestellformular ist damit für noch nicht bestellte Artikel bereits sinnvoll vorbelegt (z.B. 1), statt leer zu starten."
+        ]
+      }
+    ]
+  },
   {
     version: "1.0",
     groups: [
