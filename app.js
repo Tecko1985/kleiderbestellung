@@ -487,7 +487,6 @@ function showConnectScreen(errorMsg) {
 async function init() {
   document.getElementById("version-badge").textContent = "v" + APP_VERSION;
   document.getElementById("version-badge-2").textContent = "v" + APP_VERSION;
-  document.getElementById("version-badge-nav").textContent = "v" + APP_VERSION;
   renderChangelog();
   setupTabs();
 

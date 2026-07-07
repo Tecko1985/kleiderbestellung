@@ -1,6 +1,17 @@
-const APP_VERSION = "1.1";
+const APP_VERSION = "1.2";
 
 const APP_CHANGELOG = [
+  {
+    version: "1.2",
+    groups: [
+      {
+        title: "Sonstiges",
+        items: [
+          "Doppelte Versionsanzeige im Einstellungen-Button entfernt (Version steht weiterhin im Titel und in der Versionshistorie)."
+        ]
+      }
+    ]
+  },
   {
     version: "1.1",
     groups: [
