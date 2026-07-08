@@ -108,6 +108,19 @@ function setupTabs() {
   document.querySelectorAll("nav button[data-tab]").forEach((btn) => {
     btn.addEventListener("click", () => activateTab(btn.dataset.tab));
   });
+
+  // Versionshistorie liegt im oeffentlichen Bestellung-Tab (siehe index.html), nicht im
+  // admin-only Einstellungen-Tab — fuer jeden eingeloggten Nutzer erreichbar.
+  const versionBadgeHeader = document.getElementById("version-badge");
+  const openVersionHistory = () => {
+    activateTab("bestellung");
+    const panel = document.getElementById("changelog-panel");
+    if (panel) panel.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+  versionBadgeHeader.addEventListener("click", openVersionHistory);
+  versionBadgeHeader.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openVersionHistory(); }
+  });
 }
 
 function showFormError(msg) {
@@ -541,18 +554,6 @@ async function init() {
       renderFensterEinstellungen();
       renderKatalogVerwaltung();
       renderBestellungsuebersicht();
-      // Header-Badge nur fuer Admins klickbar machen: der Ziel-Tab "einstellungen" ist
-      // fuer Nicht-Admins per nav-einstellungen ausgeblendet (Bestellfenster/Katalog/
-      // Uebersicht), daher hier bewusst nicht global verdrahtet.
-      const versionBadgeHeader = document.getElementById("version-badge");
-      versionBadgeHeader.classList.add("version-badge-link");
-      versionBadgeHeader.setAttribute("role", "button");
-      versionBadgeHeader.setAttribute("tabindex", "0");
-      versionBadgeHeader.title = "Versionshistorie ansehen";
-      versionBadgeHeader.addEventListener("click", () => activateTab("einstellungen"));
-      versionBadgeHeader.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); activateTab("einstellungen"); }
-      });
     }
   } catch (e) {
     if (e instanceof NotLoggedInError) {
