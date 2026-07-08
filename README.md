@@ -19,6 +19,8 @@ Heiligenstadt.
   vorbelegt angezeigt.
 - Ist das Bestellfenster geschlossen, wird die eigene Bestellung nur noch
   schreibgeschützt angezeigt.
+- Betreute Mannschaft(en) aus dem zentralen Trainerprofil (Tools-Übersicht)
+  werden als Hinweis neben dem eigenen Namen angezeigt, sofern dort gepflegt.
 
 ### Artikelkatalog & Bestellfenster (nur Admins)
 - Artikel mit Name, verfügbaren Größen und Standardmenge anlegen, bearbeiten,

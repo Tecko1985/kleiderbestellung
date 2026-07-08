@@ -1,50 +1,6 @@
-const APP_VERSION = "1.4";
+const APP_VERSION = "1.0";
 
 const APP_CHANGELOG = [
-  {
-    version: "1.4",
-    groups: [
-      {
-        title: "Versionsbadge",
-        items: [
-          "Die Versionshistorie ist umgezogen in den Bestellung-Tab und damit für alle Nutzer sichtbar, nicht mehr nur für Admins — der Klick auf den Versionshinweis funktioniert jetzt für jeden."
-        ]
-      }
-    ]
-  },
-  {
-    version: "1.3",
-    groups: [
-      {
-        title: "Versionsbadge",
-        items: [
-          "Der Versionshinweis oben neben dem Titel ist für Admins jetzt anklickbar und führt direkt zu dieser Änderungsübersicht im Einstellungen-Tab."
-        ]
-      }
-    ]
-  },
-  {
-    version: "1.2",
-    groups: [
-      {
-        title: "Sonstiges",
-        items: [
-          "Doppelte Versionsanzeige im Einstellungen-Button entfernt (Version steht weiterhin im Titel und in der Versionshistorie)."
-        ]
-      }
-    ]
-  },
-  {
-    version: "1.1",
-    groups: [
-      {
-        title: "Sonstiges",
-        items: [
-          "Betreute Mannschaft(en) aus dem zentralen Trainerprofil (Tools-Übersicht) werden jetzt als Hinweis neben dem eigenen Namen angezeigt, sofern dort gepflegt."
-        ]
-      }
-    ]
-  },
   {
     version: "1.0",
     groups: [
@@ -53,7 +9,8 @@ const APP_CHANGELOG = [
         items: [
           "Trainer:innen wählen aus einem Artikelkatalog (z.B. Trainingsjacke, Poloshirt) die passende Größe; die Menge je Artikel ist vom Verein über den Artikelkatalog fest vorgegeben.",
           "Die eigene Bestellung kann beliebig oft geändert werden, solange das Bestellfenster geöffnet ist.",
-          "Kommentarfeld für Anmerkungen zur Bestellung (z.B. Rückfragen zur Größe)."
+          "Kommentarfeld für Anmerkungen zur Bestellung (z.B. Rückfragen zur Größe).",
+          "Betreute Mannschaft(en) aus dem zentralen Trainerprofil (Tools-Übersicht) werden als Hinweis neben dem eigenen Namen angezeigt, sofern dort gepflegt."
         ]
       },
       {
