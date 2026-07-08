@@ -541,6 +541,18 @@ async function init() {
       renderFensterEinstellungen();
       renderKatalogVerwaltung();
       renderBestellungsuebersicht();
+      // Header-Badge nur fuer Admins klickbar machen: der Ziel-Tab "einstellungen" ist
+      // fuer Nicht-Admins per nav-einstellungen ausgeblendet (Bestellfenster/Katalog/
+      // Uebersicht), daher hier bewusst nicht global verdrahtet.
+      const versionBadgeHeader = document.getElementById("version-badge");
+      versionBadgeHeader.classList.add("version-badge-link");
+      versionBadgeHeader.setAttribute("role", "button");
+      versionBadgeHeader.setAttribute("tabindex", "0");
+      versionBadgeHeader.title = "Versionshistorie ansehen";
+      versionBadgeHeader.addEventListener("click", () => activateTab("einstellungen"));
+      versionBadgeHeader.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); activateTab("einstellungen"); }
+      });
     }
   } catch (e) {
     if (e instanceof NotLoggedInError) {
