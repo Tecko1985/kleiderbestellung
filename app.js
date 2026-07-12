@@ -1,6 +1,9 @@
 let appData = { katalog: { artikel: [] }, bestellfensterOffen: true, bestellungen: {} };
 let currentUsername = null;
 let currentIsAdmin = false;
+let currentCanEdit = false;
+
+function canEdit() { return currentIsAdmin || currentCanEdit; }
 let currentVorname = null;
 let currentNachname = null;
 let currentMannschaften = [];
@@ -245,6 +248,7 @@ function renderFensterEinstellungen() {
 }
 
 async function toggleBestellfenster() {
+  if (!canEdit()) return;
   const offen = appData.bestellfensterOffen !== false;
   if (offen && !confirm("Bestellfenster wirklich schließen? Trainer:innen können ihre Bestellung danach nicht mehr ändern.")) return;
   const btn = document.getElementById("btn-toggle-fenster");
@@ -301,6 +305,7 @@ function renderKatalogVerwaltung() {
 }
 
 async function addArtikel() {
+  if (!canEdit()) return;
   showKatalogError("");
   const name = document.getElementById("na-name").value.trim();
   const groessenRaw = document.getElementById("na-groessen").value.trim();
@@ -325,6 +330,7 @@ async function addArtikel() {
 }
 
 async function updateArtikel(artikelId, changes) {
+  if (!canEdit()) return;
   showKatalogError("");
   try {
     await saveWithConflictRetry((data) => {
@@ -340,6 +346,7 @@ async function updateArtikel(artikelId, changes) {
 }
 
 async function deleteArtikel(artikelId) {
+  if (!canEdit()) return;
   showKatalogError("");
   if (istArtikelInBestellungVerwendet(artikelId)) {
     showKatalogError("Dieser Artikel wird noch bestellt und kann nur deaktiviert, nicht entfernt werden.");
@@ -390,6 +397,7 @@ function renderBestellungsuebersicht() {
 }
 
 async function deleteBestellung(username) {
+  if (!canEdit()) return;
   const entry = appData.bestellungen[username];
   if (!entry) return;
   const name = `${entry.vorname} ${entry.nachname}`.trim() || username;
@@ -542,15 +550,16 @@ async function init() {
     const [me, data] = await Promise.all([fetchMe(), gatewayLoad()]);
     currentUsername = me.username;
     currentIsAdmin = !!me.isAdmin;
+    currentCanEdit = !!me.canEdit;
     currentVorname = me.vorname || null;
     currentNachname = me.nachname || null;
     currentMannschaften = Array.isArray(me.mannschaften) ? me.mannschaften : [];
     appData = normalizeAppData(data);
-    document.getElementById("nav-einstellungen").style.display = currentIsAdmin ? "" : "none";
+    document.getElementById("nav-einstellungen").style.display = canEdit() ? "" : "none";
     startApp();
     renderHeaderUser();
     renderMeineBestellung();
-    if (currentIsAdmin) {
+    if (canEdit()) {
       renderFensterEinstellungen();
       renderKatalogVerwaltung();
       renderBestellungsuebersicht();

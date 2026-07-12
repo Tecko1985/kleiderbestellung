@@ -1,6 +1,17 @@
-const APP_VERSION = "1.0";
+const APP_VERSION = "1.1";
 
 const APP_CHANGELOG = [
+  {
+    version: "1.1",
+    groups: [
+      {
+        title: "Bearbeiten-Recht",
+        items: [
+          "Artikelkatalog pflegen, Bestellfenster öffnen/schließen und fremde Bestellungen löschen jetzt an das Bearbeiten-Recht der Gruppen-Verwaltung gekoppelt statt an Admin-Status allein. Die eigene Bestellung aufgeben/ändern bleibt für jeden mit Tool-Zugriff unverändert."
+        ]
+      }
+    ]
+  },
   {
     version: "1.0",
     groups: [
