@@ -2,17 +2,6 @@ const APP_VERSION = "1.0";
 
 const APP_CHANGELOG = [
   {
-    version: "1.1",
-    groups: [
-      {
-        title: "Bearbeiten-Recht",
-        items: [
-          "Artikelkatalog pflegen, Bestellfenster öffnen/schließen und fremde Bestellungen löschen jetzt an das Bearbeiten-Recht der Gruppen-Verwaltung gekoppelt statt an Admin-Status allein. Die eigene Bestellung aufgeben/ändern bleibt für jeden mit Tool-Zugriff unverändert."
-        ]
-      }
-    ]
-  },
-  {
     version: "1.0",
     groups: [
       {
@@ -31,21 +20,22 @@ const APP_CHANGELOG = [
         ]
       },
       {
-        title: "Bestellfenster (nur Admins)",
+        title: "Bestellfenster (Admin/Bearbeiter)",
         items: [
+          "Artikelkatalog pflegen, Bestellfenster öffnen/schließen und fremde Bestellungen löschen sind an das Bearbeiten-Recht der Gruppen-Verwaltung gekoppelt, nicht an Admin-Status allein — die eigene Bestellung aufgeben/ändern bleibt für jeden mit Tool-Zugriff unverändert möglich.",
           "Das Bestellfenster kann geschlossen werden — danach sind alle Bestellungen nur noch lesbar, damit nach Auslösung der Lieferanten-Bestellung keine Änderungen mehr möglich sind.",
           "Wieder-Öffnen jederzeit möglich."
         ]
       },
       {
-        title: "Artikelkatalog (nur Admins)",
+        title: "Artikelkatalog (Admin/Bearbeiter)",
         items: [
           "Artikel mit Name, verfügbaren Größen und Standardmenge anlegen, bearbeiten, deaktivieren oder entfernen.",
           "Artikel, die bereits bestellt wurden, können nur deaktiviert (nicht gelöscht) werden, damit bestehende Bestellungen konsistent bleiben."
         ]
       },
       {
-        title: "Bestellungsübersicht & Export (nur Admins)",
+        title: "Bestellungsübersicht & Export (Admin/Bearbeiter)",
         items: [
           "Tabelle aller abgegebenen Bestellungen mit Name, Positionen und letzter Änderung.",
           "Export als Text- oder PDF-Datei, gruppiert nach Artikel und Größe — direkt als Bestellliste an den Lieferanten weiterreichbar."
