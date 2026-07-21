@@ -115,11 +115,7 @@ function setupTabs() {
   // Versionshistorie liegt im oeffentlichen Bestellung-Tab (siehe index.html), nicht im
   // admin-only Einstellungen-Tab — fuer jeden eingeloggten Nutzer erreichbar.
   const versionBadgeHeader = document.getElementById("version-badge");
-  const openVersionHistory = () => {
-    activateTab("bestellung");
-    const panel = document.getElementById("changelog-panel");
-    if (panel) panel.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+  const openVersionHistory = () => activateTab("info");
   versionBadgeHeader.addEventListener("click", openVersionHistory);
   versionBadgeHeader.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openVersionHistory(); }
