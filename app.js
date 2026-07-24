@@ -228,7 +228,10 @@ async function submitBestellung() {
   btn.disabled = false;
   btn.textContent = "Bestellung speichern";
   renderMeineBestellung();
-  if (currentIsAdmin) renderBestellungsuebersicht();
+  // canEdit() statt currentIsAdmin: die Übersicht wird beim Start für alle
+  // Bearbeiter gerendert — nach dem Speichern blieb sie für Nicht-Admin-
+  // Bearbeiter sonst auf dem alten Stand stehen.
+  if (canEdit()) renderBestellungsuebersicht();
 }
 
 // ---------- Tab "Einstellungen": Bestellfenster ----------

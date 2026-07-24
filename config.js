@@ -24,7 +24,8 @@ const APP_CHANGELOG = [
         items: [
           "Artikelkatalog pflegen, Bestellfenster öffnen/schließen und fremde Bestellungen löschen sind an das Bearbeiten-Recht der Gruppen-Verwaltung gekoppelt, nicht an Admin-Status allein — die eigene Bestellung aufgeben/ändern bleibt für jeden mit Tool-Zugriff unverändert möglich.",
           "Das Bestellfenster kann geschlossen werden — danach sind alle Bestellungen nur noch lesbar, damit nach Auslösung der Lieferanten-Bestellung keine Änderungen mehr möglich sind.",
-          "Wieder-Öffnen jederzeit möglich."
+          "Wieder-Öffnen jederzeit möglich.",
+          "Nach dem Speichern der eigenen Bestellung aktualisiert sich die Bestellübersicht jetzt auch für Bearbeiter ohne Admin-Status sofort (vorher blieb sie dort bis zum nächsten Neuladen auf dem alten Stand)."
         ]
       },
       {
