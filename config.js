@@ -20,23 +20,23 @@ const APP_CHANGELOG = [
         ]
       },
       {
-        title: "Bestellfenster (Admin/Bearbeiter)",
+        title: "Bestellfenster (Administration)",
         items: [
-          "Artikelkatalog pflegen, Bestellfenster öffnen/schließen und fremde Bestellungen löschen sind an das Bearbeiten-Recht der Gruppen-Verwaltung gekoppelt, nicht an Admin-Status allein — die eigene Bestellung aufgeben/ändern bleibt für jeden mit Tool-Zugriff unverändert möglich.",
+          "Artikelkatalog pflegen, Bestellfenster öffnen/schließen, Bestellübersicht und fremde Bestellungen löschen sind an die Stufe „Administrieren“ der Gruppen-Verwaltung gekoppelt (Häkchen im Sichtbarkeits-Panel der Tools-Übersicht) — die eigene Bestellung aufgeben/ändern bleibt für jeden mit Tool-Zugriff unverändert möglich.",
           "Das Bestellfenster kann geschlossen werden — danach sind alle Bestellungen nur noch lesbar, damit nach Auslösung der Lieferanten-Bestellung keine Änderungen mehr möglich sind.",
           "Wieder-Öffnen jederzeit möglich.",
-          "Nach dem Speichern der eigenen Bestellung aktualisiert sich die Bestellübersicht jetzt auch für Bearbeiter ohne Admin-Status sofort (vorher blieb sie dort bis zum nächsten Neuladen auf dem alten Stand)."
+          "Nach dem Speichern der eigenen Bestellung aktualisiert sich die Bestellübersicht für Administrierende sofort (vorher blieb sie bis zum nächsten Neuladen auf dem alten Stand)."
         ]
       },
       {
-        title: "Artikelkatalog (Admin/Bearbeiter)",
+        title: "Artikelkatalog (Administration)",
         items: [
           "Artikel mit Name, verfügbaren Größen und Standardmenge anlegen, bearbeiten, deaktivieren oder entfernen.",
           "Artikel, die bereits bestellt wurden, können nur deaktiviert (nicht gelöscht) werden, damit bestehende Bestellungen konsistent bleiben."
         ]
       },
       {
-        title: "Bestellungsübersicht & Export (Admin/Bearbeiter)",
+        title: "Bestellungsübersicht & Export (Administration)",
         items: [
           "Tabelle aller abgegebenen Bestellungen mit Name, Positionen und letzter Änderung.",
           "Export als Text- oder PDF-Datei, gruppiert nach Artikel und Größe — direkt als Bestellliste an den Lieferanten weiterreichbar."

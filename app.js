@@ -1,9 +1,14 @@
 let appData = { katalog: { artikel: [] }, bestellfensterOffen: true, bestellungen: {} };
 let currentUsername = null;
 let currentIsAdmin = false;
+let currentCanAdmin = false;
 let currentCanEdit = false;
 
-function canEdit() { return currentIsAdmin || currentCanEdit; }
+function canEdit() { return currentIsAdmin || currentCanEdit; } // seit 2026-07-24 ohne Konsument — die ganze Verwaltung hängt an canAdmin(), bestellen darf jeder Sichtbare
+// Dritte Stufe "Administrieren" (Tools-Übersicht): Katalog, Bestellfenster,
+// Bestellübersicht und fremde Bestellungen löschen sind Verwaltungssache —
+// das Bearbeiten-Häkchen hat in dieser App bewusst keine Funktion mehr.
+function canAdmin() { return currentIsAdmin || currentCanAdmin; }
 let currentVorname = null;
 let currentNachname = null;
 let currentMannschaften = [];
@@ -228,10 +233,9 @@ async function submitBestellung() {
   btn.disabled = false;
   btn.textContent = "Bestellung speichern";
   renderMeineBestellung();
-  // canEdit() statt currentIsAdmin: die Übersicht wird beim Start für alle
-  // Bearbeiter gerendert — nach dem Speichern blieb sie für Nicht-Admin-
-  // Bearbeiter sonst auf dem alten Stand stehen.
-  if (canEdit()) renderBestellungsuebersicht();
+  // Gleiche Stufe wie beim Start-Rendering der Übersicht (canAdmin) — sonst
+  // bleibt sie nach dem Speichern der eigenen Bestellung auf dem alten Stand.
+  if (canAdmin()) renderBestellungsuebersicht();
 }
 
 // ---------- Tab "Einstellungen": Bestellfenster ----------
@@ -247,7 +251,7 @@ function renderFensterEinstellungen() {
 }
 
 async function toggleBestellfenster() {
-  if (!canEdit()) return;
+  if (!canAdmin()) return;
   const offen = appData.bestellfensterOffen !== false;
   if (offen && !confirm("Bestellfenster wirklich schließen? Trainer:innen können ihre Bestellung danach nicht mehr ändern.")) return;
   const btn = document.getElementById("btn-toggle-fenster");
@@ -304,7 +308,7 @@ function renderKatalogVerwaltung() {
 }
 
 async function addArtikel() {
-  if (!canEdit()) return;
+  if (!canAdmin()) return;
   showKatalogError("");
   const name = document.getElementById("na-name").value.trim();
   const groessenRaw = document.getElementById("na-groessen").value.trim();
@@ -329,7 +333,7 @@ async function addArtikel() {
 }
 
 async function updateArtikel(artikelId, changes) {
-  if (!canEdit()) return;
+  if (!canAdmin()) return;
   showKatalogError("");
   try {
     await saveWithConflictRetry((data) => {
@@ -345,7 +349,7 @@ async function updateArtikel(artikelId, changes) {
 }
 
 async function deleteArtikel(artikelId) {
-  if (!canEdit()) return;
+  if (!canAdmin()) return;
   showKatalogError("");
   if (istArtikelInBestellungVerwendet(artikelId)) {
     showKatalogError("Dieser Artikel wird noch bestellt und kann nur deaktiviert, nicht entfernt werden.");
@@ -396,7 +400,7 @@ function renderBestellungsuebersicht() {
 }
 
 async function deleteBestellung(username) {
-  if (!canEdit()) return;
+  if (!canAdmin()) return;
   const entry = appData.bestellungen[username];
   if (!entry) return;
   const name = `${entry.vorname} ${entry.nachname}`.trim() || username;
@@ -552,16 +556,17 @@ async function init() {
     const me = await fetchMe();
     currentUsername = me.username;
     currentIsAdmin = !!me.isAdmin;
+    currentCanAdmin = !!me.canAdmin;
     currentCanEdit = !!me.canEdit;
     currentVorname = me.vorname || null;
     currentNachname = me.nachname || null;
     currentMannschaften = Array.isArray(me.mannschaften) ? me.mannschaften : [];
     appData = normalizeAppData(data);
-    document.getElementById("nav-einstellungen").style.display = canEdit() ? "" : "none";
+    document.getElementById("nav-einstellungen").style.display = canAdmin() ? "" : "none";
     startApp();
     renderHeaderUser();
     renderMeineBestellung();
-    if (canEdit()) {
+    if (canAdmin()) {
       renderFensterEinstellungen();
       renderKatalogVerwaltung();
       renderBestellungsuebersicht();
